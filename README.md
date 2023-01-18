@@ -48,26 +48,29 @@ Para que este flow funcione, debes cumplir con los siguientes requisitos previos
 - 1 nodo Function
 - 1 nodo MySql
 4. Para agregar el nodo MySql debemos ir a la pestaña "Manage palatte" menú derecho, e instalar node-red-node-mysql
-5. En el nodo function debemos agregar el siguiente codigo
+5. En el nodo function debemos agregar el siguiente codigo:
+
 msg.topic = "INSERT INTO clima (`nombre`, `temperatura`,`humedad`) VALUES ('ceci'," + global.get("tempAPI") + "," + global.get("humAPI") + ");"; return msg;
 
 ### Instrucciones para la creación de la Base de Datos
-1. Instalar MySql -> sudo apt install mysql-server
-2. Entrar a MySql -> sudo mysql
-3. Crear una Base de Datos -> create databases CodigoIoT;
-4. Seleccionar la Base de Datos creada -> use CodigoIoT;
+1. Instalar MySql -> `sudo apt install mysql-server`
+2. Entrar a MySql -> `sudo mysql`
+3. Crear una Base de Datos ->  `create databases CodigoIoT;`
+4. Seleccionar la Base de Datos creada -> `use CodigoIoT;`
 5. Crear una tabla que tenga los siguientes datos: id, fecha, nombre, temperatura y humedad con el siguiente comando: 
-create table clima (id INT (6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP, nombre CHAR (248) NOT NULL, temperatura FLOAT (4,2), humedad INT (3));
+
+`create table clima (id INT (6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP, nombre CHAR (248) NOT NULL, temperatura FLOAT (4,2), humedad INT (3));; `
+
 6. Crear un usuario y contraseña nuevo para usarlo en Node Red
-CREATE USER 'newuser'@'localhost' IDENTIFIED BY 'password';
+`CREATE USER 'newuser'@'localhost' IDENTIFIED BY 'password';;` 
 7. Para otorgar permisos de usuario 
-GRANT ALL PRIVILEGES ON * . * TO 'newuser'@'localhost';
+`;GRANT ALL PRIVILEGES ON * . * TO 'newuser'@'localhost';;` 
 
 ### Notas 
-- Para consultar la Base de Datos usa el comando show databases;
-- Para consultar la tabla en el interior de una nase de datos seleccionada con el comando show tables;
-- Consultar la forma de la tabla con describe clima;
-- Y para consultar todos los datos de la tabla utiliza SELECT * FROM clima;
+- Para consultar la Base de Datos usa el comando  `show databases;`
+- Para consultar la tabla en el interior de una base de datos seleccionada con el comando  `show tables; ;`
+- Consultar la forma de la tabla con  `describe clima;`
+- Y para consultar todos los datos de la tabla utiliza  `SELECT * FROM clima;`
 
 ### Instrucciones de operación
 --------FALTA AQUI 
