@@ -72,18 +72,39 @@ msg.topic = "INSERT INTO clima (`nombre`, `temperatura`,`humedad`) VALUES ('ceci
 - Consultar la forma de la tabla con  `describe clima;`
 - Y para consultar todos los datos de la tabla utiliza  `SELECT * FROM clima;`
 
-### Instrucciones de operación
---------FALTA AQUI 
-Para observar el resultado de este flow, sólo es necesario abrir el navegador y escribir la siguiente dirección http://localhost:1880/ui y dentro de la página hay un menú derecho y hacer clic en flow5, debemos hacer clic en el TimeStamp para enviar información al http request.
+### Instrucciones para instalar grafana
+`sudo apt-get install -y adduser libfontconfig1`
 
---------
+`wget https://dl.grafana.com/enterprise/release/grafana-enterprise_9.1.3_amd64.deb`
+
+`sudo dpkg -i grafana-enterprise_9.1.3_amd64.deb`
+
+### Instrucciones de operación
+
+1. Eliminar el nodo TimeStamp de la base de datos agregar cuatro nodos template.
+2. Agregar el siguiente codigo al nodo function:
+`msg.topic = "INSERT INTO clima (`nombre`,`temperatura`,`humedad`) VALUES ('" + msg.payload.id + "'," + msg.payload.temp + "," + msg.payload.hum + ");"; return msg;`
+3. Abrir el navegador y colocar en la URL localhost:3000
+4. Iniciar sesión por primera vez: usuario admin y modificar la contraseña. 
+5. Agregar la base de datos desde configuración en la pestaña Data Source:
+- Seleccionar MySql
+- Host: localhost:3306
+- Database: Nombre de la base creada (clima)
+- User & Password: Nombre y contraseña que se crearon
+- TimeZone: --Universal-- y guardar con Save&test asegurarse que se haya conectado exitosamente.
+6. Agregar un panel que se llame temperatura y la segunda humedad.
+7. Información personal agregar otro panel y en la opcion WHERE indicar solo la humedad de un usuario. 
+8. Modificar el archivo de grafana.ini donde se encuentra en la dirección /etc/grafana se abre terminal para ejecutar `sudo nano grafana.ini` donde llegaremos a la opción security y modificar `;allow_embedding = false a allow_embedding = true` guardar cambios y reiniciar grafana  con `sudo /bin/systemctl restart grafana-server`
+9. Copiar la dirección de la grafica dando clic en share, embed y pegarlo en el template de node red, dar clic y en Deploy e ir al navegador y colocar localhost:1880/ui para ver los resultados. 
 
 ## Resultados
 
-A continuación puede verse una vista previa del resultado de este flow.
+A continuación puede verse una vista previa de los resultado de este flow.
 
-![](-http------)
-![](https://---)
+![](https://github.com/Cecilia-X-M/Clima-mysql/blob/main/Diagrama-bd.png)
+![](https://github.com/Cecilia-X-M/Clima-mysql/blob/main/InfBD.png)
+![](https://github.com/Cecilia-X-M/Clima-mysql/blob/main/templates.png)
+![](https://github.com/Cecilia-X-M/Clima-mysql/blob/main/graficasGrafana.png)
 
 # Créditos
 
