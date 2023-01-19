@@ -91,7 +91,7 @@ msg.topic = "INSERT INTO clima (`nombre`, `temperatura`,`humedad`) VALUES ('ceci
 - Host: localhost:3306
 - Database: Nombre de la base creada (clima)
 - User & Password: Nombre y contraseña que se crearon
-- TimeZone: --Universal-- y guardar con Save&test asegurarse que se haya conectado exitosamente.
+- TimeZone: Coordinated Universal Time y guardar con Save&test asegurarse que se haya conectado exitosamente.
 6. Agregar un panel que se llame temperatura y la segunda humedad.
 7. Información personal agregar otro panel y en la opcion WHERE indicar solo la humedad de un usuario. 
 8. Modificar el archivo de grafana.ini donde se encuentra en la dirección /etc/grafana se abre terminal para ejecutar `sudo nano grafana.ini` donde llegaremos a la opción security y modificar `;allow_embedding = false a allow_embedding = true` guardar cambios y reiniciar grafana  con `sudo /bin/systemctl restart grafana-server`
